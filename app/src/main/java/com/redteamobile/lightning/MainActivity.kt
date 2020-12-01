@@ -7,20 +7,24 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomappbar.BottomAppBar
 
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+    companion object {
+        private const val FRAGMENTS_TAG = "android:support:fragments"
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        //删除保存的Fragment，也可以重写onSaveInstanceState方法不让其保存
+        savedInstanceState?.putParcelable(FRAGMENTS_TAG, null)
+
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+        val navView: BottomAppBar = findViewById(R.id.bottom_app_bar)
+
+
     }
 }
