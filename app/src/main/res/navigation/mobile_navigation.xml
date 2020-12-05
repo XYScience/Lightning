@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.redteamobile.lightning.ui.home.HomeFragment"
+        android:name="com.redteamobile.lightning.ui.profile.ProfileFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_task" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.redteamobile.lightning.ui.dashboard.DashboardFragment"
+        android:name="com.redteamobile.lightning.ui.task.TaskFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.redteamobile.lightning.ui.notifications.NotificationsFragment"
+        android:name="com.redteamobile.lightning.ui.me.MeFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_me" />
 </navigation>

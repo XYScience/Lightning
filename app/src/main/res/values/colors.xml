@@ -19,5 +19,9 @@
     <color name="dialog_background">#FFFFFF</color>
     <color name="enable_progress_background">#FFFFFF</color>
     <color name="btn_disable_background">#660BA9DB</color>
+    <color name="item_background_green">#303AA757</color>
+    <color name="item_background_green_text">#3AA757</color>
+    <color name="item_background_yellow">#30F9BB2D</color>
+    <color name="item_background_yellow_text">#F9BB2D</color>
 
 </resources>
