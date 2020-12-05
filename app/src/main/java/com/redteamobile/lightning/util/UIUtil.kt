@@ -4,14 +4,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import android.util.Log
 import android.view.View
 import com.redteamobile.lightning.R
+import java.util.*
 
 /**
  * @author SScience
  * @description
  */
 object UIUtil {
+
+    private const val TAG = "UIUtil"
 
     fun setStatusBarBackground(activity: Activity, colorRes: Int) {
         activity.window.statusBarColor = activity.getColor(colorRes)
@@ -73,5 +77,13 @@ object UIUtil {
     fun px2dp(context: Context, pxValue: Float): Int {
         val scale: Float = context.resources.displayMetrics.density
         return (pxValue / scale + 0.5f).toInt()
+    }
+
+    fun getLocaleDefault(): String {
+        Log.i(TAG, "getLocaleDefault: " + Locale.getDefault().language)
+        return when (Locale.getDefault().language) {
+            "zh" -> "zh"
+            else -> "en"
+        }
     }
 }
