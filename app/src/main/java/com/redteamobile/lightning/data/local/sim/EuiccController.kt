@@ -6,7 +6,6 @@ import android.telephony.euicc.EuiccManager
 import android.text.TextUtils
 import android.util.Log
 import com.redteamobile.ferrari.sim.constants.enums.ProfileState
-import com.redteamobile.lightning.data.local.sim.model.ProfileInfo
 import com.redteamobile.lightning.data.local.sim.model.ProfileInfos
 import com.redteamobile.lightning.util.LogUtil
 import io.reactivex.Observable

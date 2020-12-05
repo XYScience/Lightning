@@ -1,7 +1,6 @@
 package com.redteamobile.lightning.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redteamobile.lightning.Global
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.ui.profile.adapter.ESimCardAdapter
+import com.redteamobile.lightning.ui.profile.adapter.TaskAdapter
 import com.redteamobile.lightning.util.LogUtil
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -40,12 +40,10 @@ class ProfileFragment : Fragment() {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         list_profile.layoutManager = linearLayoutManager
         activity?.let { a ->
-            Log.e(">>>>>", "thread 1: ${Thread.currentThread()}")
             eSimCardAdapter = ESimCardAdapter(a)
             list_profile.adapter = eSimCardAdapter
             Global.getInstance(a).euiccController.getDownloadableSubscriptionList(a).subscribe({
                 it?.let {
-                    Log.e(">>>>>", "thread 2: ${Thread.currentThread()}")
                     eSimCardAdapter?.setData(it)
                 }
             }, {
