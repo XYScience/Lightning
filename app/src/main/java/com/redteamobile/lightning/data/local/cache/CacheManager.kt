@@ -5,10 +5,12 @@ import android.content.Context
 class CacheManager private constructor(context: Context) {
 
     private val memoryCache = MemoryCache()
+    private val fileCache: FileCache = FileCache(context)
 
     operator fun get(key: String): String? {
         var value: String? = memoryCache[key]
         if (value == null) {
+            value = fileCache[key]
             if (value != null) {
                 memoryCache.put(key, value)
             }
@@ -17,10 +19,12 @@ class CacheManager private constructor(context: Context) {
     }
 
     fun put(key: String, value: String) {
+        fileCache.put(key, value)
         memoryCache.put(key, value)
     }
 
     fun remove(key: String) {
+        fileCache.remove(key)
         removeMemory(key)
     }
 

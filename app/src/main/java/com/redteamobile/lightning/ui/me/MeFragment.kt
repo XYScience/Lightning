@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.data.local.cache.LogicCache
+import com.redteamobile.lightning.data.remote.HttpManager
 import com.redteamobile.lightning.ui.equipment.EquipmentsActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_me.*
 
 class MeFragment : Fragment() {
@@ -25,10 +27,21 @@ class MeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initView()
+        updateData()
+        initData()
     }
 
-    private fun initView() {
+    private fun initData() {
+        activity?.let { a ->
+            HttpManager.getInstance(a).httpService.userInfo()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    updateData()
+                }
+        }
+    }
+
+    private fun updateData() {
         activity?.let { a ->
             var userModel = LogicCache.userInfo(a)
             tv_name.text = "${userModel?.name}/${userModel?.nickName}"

@@ -117,4 +117,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.google.guava:guava:23.5-android'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'fr.bmartel:jspeedtest:1.32.1'
 }

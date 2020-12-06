@@ -2,6 +2,7 @@ package com.redteamobile.lightning.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,5 +45,11 @@ object Util {
         }
         LogUtil.d(TAG, String.format("networkInfo state is %s", state.toString()))
         return networkInfo.isConnected
+    }
+
+    fun format2Mbps(data: BigDecimal): Double {
+        val original = data.toDouble() / (1000 * 1000)
+        val result = String.format("%.2f", original)
+        return result.toDouble()
     }
 }

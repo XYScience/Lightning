@@ -80,9 +80,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        HttpManager.getInstance(this).httpService.userInfo()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-            }
+
     }
 }
