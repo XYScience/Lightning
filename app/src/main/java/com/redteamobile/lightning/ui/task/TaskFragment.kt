@@ -1,6 +1,7 @@
 package com.redteamobile.lightning.ui.task
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,8 @@ class TaskFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         list_task.layoutManager = linearLayoutManager
-        val dividerItemDecoration = DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
+        val dividerItemDecoration =
+            DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
         list_task.addItemDecoration(dividerItemDecoration)
         taskAdapter = TaskAdapter(requireActivity())
         list_task.adapter = taskAdapter
@@ -63,9 +65,18 @@ class TaskFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 val listTaskModel = it.data
-                listTaskModel?.let {
-                    taskAdapter?.setData(it)
+                val list = ArrayList<TaskModel>()
+
+                listTaskModel?.forEach { task ->
+                    if (task.status == 1) {
+                        list.add(0, task)
+                    } else {
+                        list.add(task)
+                    }
+                    return@forEach
                 }
+                Log.e(TAG, "getData list: ${list.size}")
+                taskAdapter?.setData(list)
                 swipeRefresh.isRefreshing = false
             }
     }
