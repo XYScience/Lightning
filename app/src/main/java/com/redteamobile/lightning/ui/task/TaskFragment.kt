@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.data.remote.model.bean.TaskModel
+import com.redteamobile.lightning.data.remote.model.response.TaskResponse
 import com.redteamobile.lightning.ui.profile.adapter.TaskAdapter
 import kotlinx.android.synthetic.main.fragment_task.*
 

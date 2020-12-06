@@ -1,7 +1,7 @@
 package com.redteamobile.lightning.data.remote.api
 
 import com.redteamobile.lightning.data.remote.model.request.BasicRequest
-import com.redteamobile.lightning.data.remote.model.response.BannerResponse
+import com.redteamobile.lightning.data.remote.model.response.TaskResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -21,6 +21,6 @@ interface Api {
      * 广告列表
      */
     @POST("v1/query/banner")
-    fun banner(@Body request: BasicRequest): Observable<BannerResponse>
+    fun banner(@Body request: BasicRequest): Observable<TaskResponse>
 
 }

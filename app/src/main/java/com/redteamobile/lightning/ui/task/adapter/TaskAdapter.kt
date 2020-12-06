@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.data.remote.model.bean.TaskModel
@@ -47,23 +48,30 @@ class TaskAdapter(val context: Context) :
                 tv_task_name.text = task.name
                 when (task.status) {
                     0 -> {
-                        tv_status.text = "Tasking"
+                        tv_status.isEnabled = true
+                        tv_status.text = "Testable"
                         tv_status.background = resources.getDrawable(R.drawable.shape_status_green_bg)
                         tv_status.setTextColor(resources.getColor(R.color.item_background_green_text))
                     }
                     1 -> {
-                        tv_status.text = "Task Cancel"
+                        tv_status.isEnabled = false
+                        tv_status.text = "Canceled"
                         tv_status.background = resources.getDrawable(R.drawable.shape_status_grey_bg)
                         tv_status.setTextColor(resources.getColor(R.color.item_background_grey_text))
                     }
                     2 -> {
-                        tv_status.text = "Tasked"
-                        tv_status.background = resources.getDrawable(R.drawable.shape_status_yellow_bg)
-                        tv_status.setTextColor(resources.getColor(R.color.item_background_yellow_text))
+                        tv_status.isEnabled = false
+                        tv_status.text = "Tested"
+                        tv_status.background = resources.getDrawable(R.drawable.shape_status_grey_bg)
+                        tv_status.setTextColor(resources.getColor(R.color.item_background_grey_text))
                     }
                 }
                 tv_time.text = Util.formatTime(task.createDate)
-                tv_coins.text = "Conis: ${task.coins}"
+                tv_coins.text = "Reward: ${task.coins} $"
+
+                tv_status.setOnClickListener {
+                    Toast.makeText(context, "开始测试..", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

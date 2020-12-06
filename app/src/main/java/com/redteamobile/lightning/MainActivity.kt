@@ -80,10 +80,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        HttpManager.getInstance(this).httpService.banner()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Log.e(">>>>>", "banner: ${it.toJson()}")
-            }
+
     }
 }

@@ -1,12 +1,10 @@
 package com.redteamobile.lightning.data.remote
 
 import android.content.Context
-import com.google.gson.Gson
 import com.redteamobile.lightning.data.remote.api.Api
 import com.redteamobile.lightning.data.remote.model.request.BasicRequest
-import com.redteamobile.lightning.data.remote.model.response.BannerResponse
-import com.redteamobile.lightning.data.remote.model.response.BasicResponse
-import com.redteamobile.lightning.data.remote.transformer.BannerTransformer
+import com.redteamobile.lightning.data.remote.model.response.TaskResponse
+import com.redteamobile.lightning.data.remote.transformer.TaskTransformer
 import com.redteamobile.lightning.data.remote.transformer.RequestTransformer
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -33,7 +31,6 @@ class HttpService(ctx: Context) {
         .build()
         .create(Api::class.java)
 
-
     private fun baseUrl(): String {
         val environment = HttpClient.environment()
         return when (environment) {
@@ -43,10 +40,10 @@ class HttpService(ctx: Context) {
         }
     }
 
-    fun banner(): Observable<BannerResponse> {
+    fun task(): Observable<TaskResponse> {
         return redteaGOApi.banner(BasicRequest())
-            .compose(RequestTransformer<BannerResponse>())
-            .compose(BannerTransformer(context))
+            .compose(RequestTransformer<TaskResponse>())
+            .compose(TaskTransformer(context))
     }
 
 }

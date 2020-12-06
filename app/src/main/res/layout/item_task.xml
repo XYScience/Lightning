@@ -24,8 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:background="@drawable/shape_status_green_bg"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_marginTop="6dp"
-        android:text="Tasking"
+        android:text="Testable"
         android:textColor="@color/item_background_green_text"
         android:textSize="12sp" />
 
@@ -45,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_time"
         android:layout_marginTop="10dp"
-        android:text="Coins: 66"
-        android:textColor="@color/subtext_color"
+        android:text="1 $"
+        android:textColor="@color/price_normal"
         android:textSize="12sp" />
 
 </RelativeLayout>
