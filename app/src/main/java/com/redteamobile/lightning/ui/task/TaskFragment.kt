@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.data.remote.HttpManager
 import com.redteamobile.lightning.data.remote.model.bean.TaskModel
@@ -16,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_task.*
 
 
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
         const val TAG = "TaskFragment"
@@ -37,25 +38,35 @@ class TaskFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initView()
+
     }
 
     private fun initView() {
+        swipeRefresh.setOnRefreshListener(this)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         list_task.layoutManager = linearLayoutManager
-        activity?.let { a ->
-            val dividerItemDecoration = DividerItemDecoration(a, DividerItemDecoration.VERTICAL)
-            list_task.addItemDecoration(dividerItemDecoration)
-            taskAdapter = TaskAdapter(a)
-            list_task.adapter = taskAdapter
-            HttpManager.getInstance(a).httpService.task()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    val listTaskModel = it.data
-                    listTaskModel?.let {
-                        taskAdapter?.setData(it)
-                    }
+        val dividerItemDecoration = DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
+        list_task.addItemDecoration(dividerItemDecoration)
+        taskAdapter = TaskAdapter(requireActivity())
+        list_task.adapter = taskAdapter
+        onRefresh()
+    }
+
+    override fun onRefresh() {
+        swipeRefresh.isRefreshing = true
+        getData()
+    }
+
+    private fun getData() {
+        HttpManager.getInstance(requireActivity()).httpService.task()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                val listTaskModel = it.data
+                listTaskModel?.let {
+                    taskAdapter?.setData(it)
                 }
-        }
+                swipeRefresh.isRefreshing = false
+            }
     }
 }

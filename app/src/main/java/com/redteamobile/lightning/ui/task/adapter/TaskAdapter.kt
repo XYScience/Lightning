@@ -36,9 +36,10 @@ class TaskAdapter(val activity: Activity) :
         userModel = LogicCache.userInfo(activity)
     }
 
-    private var dataList: List<TaskModel> = ArrayList()
+    private var dataList: ArrayList<TaskModel> = ArrayList()
 
-    fun setData(dataList: List<TaskModel>) {
+    fun setData(dataList: ArrayList<TaskModel>) {
+        this.dataList.clear()
         this.dataList = dataList
         notifyDataSetChanged()
     }
