@@ -25,5 +25,7 @@
     <color name="item_background_yellow_text">#F9BB2D</color>
     <color name="item_background_grey">#30757575</color>
     <color name="item_background_grey_text">#757575</color>
+    <color name="me_coins_bg">#10000000</color>
+    <color name="me_settings_bg">#0A000000</color>
 
 </resources>

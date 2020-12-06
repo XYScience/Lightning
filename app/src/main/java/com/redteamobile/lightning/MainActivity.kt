@@ -2,8 +2,7 @@ package com.redteamobile.lightning
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.navigation.Navigation
+import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -11,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.redteamobile.lightning.data.remote.HttpManager
 import com.redteamobile.lightning.ui.base.BaseActivity
+import com.redteamobile.lightning.util.Activities
 import com.redteamobile.lightning.util.UIUtil
 import com.redteamobile.lightning.util.toJson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,11 +44,39 @@ class MainActivity : BaseActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_profile, R.id.navigation_task, R.id.navigation_me
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val elevation = UIUtil.dp2px(this@MainActivity, 4f).toFloat()
+        navView.setOnNavigationItemSelectedListener(object :
+            BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                navController.navigate(item.itemId)
+                when (item.itemId) {
+                    R.id.navigation_profile -> {
+                        app_bar.elevation = elevation
+                        return true
+                    }
+                    R.id.navigation_task -> {
+                        app_bar.elevation = elevation
+                        return true
+                    }
+                    R.id.navigation_me -> {
+                        app_bar.elevation = 0f
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Activities.finish(MainActivity::class.java)
     }
 
     override fun initData() {
