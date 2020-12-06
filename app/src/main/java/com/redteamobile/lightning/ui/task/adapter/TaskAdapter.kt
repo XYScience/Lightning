@@ -180,7 +180,7 @@ class TaskAdapter(val activity: Activity) :
                     activity.runOnUiThread {
                         uploadTextView.text = "$avgRateBit Mbps"
                     }
-                    startUploadData(taskId, "Download: $avgRateBitDownload, Upload: $avgRateBit")
+                    startUploadData(taskId, "Download: $avgRateBitDownload Mbps, Upload: $avgRateBit Mbps")
                     dialog.dismiss()
                 }
 
