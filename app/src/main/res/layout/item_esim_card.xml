@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/shape_status_green_bg"
+                android:foreground="?attr/selectableItemBackground"
                 android:text="使用中"
                 android:textColor="@color/item_background_green_text"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"

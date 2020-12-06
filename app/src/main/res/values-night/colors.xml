@@ -19,5 +19,6 @@
     <color name="dialog_background">#2D2E30</color>
     <color name="enable_progress_background">#2D2E30</color>
     <color name="btn_disable_background">#660BA9DB</color>
+    <color name="item_divider">#77B3B3B3</color>
 
 </resources>

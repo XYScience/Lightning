@@ -20,7 +20,9 @@ class ProfileInfos() : Parcelable {
     var displayName: CharSequence? = null
     //    DISABLED(0),
     //    ENABLED(1);
+    //    UNDOWNLOAD(2);
     var profileState: Int? = null
+    var ac: String? = null
 
     constructor(parcel: Parcel) : this() {
         simSlotIndex = parcel.readValue(Int::class.java.classLoader) as? Int
@@ -33,6 +35,7 @@ class ProfileInfos() : Parcelable {
         subscriptionId = parcel.readValue(Int::class.java.classLoader) as? Int
         displayName = parcel.readString()
         profileState = parcel.readValue(Int::class.java.classLoader) as? Int
+        ac = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -46,6 +49,7 @@ class ProfileInfos() : Parcelable {
         parcel.writeValue(subscriptionId)
         parcel.writeString(displayName?.toString())
         parcel.writeValue(profileState)
+        parcel.writeString(ac)
     }
 
     override fun describeContents(): Int {
@@ -61,6 +65,4 @@ class ProfileInfos() : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
-
 }

@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Build
 import android.util.Log
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.redteamobile.lightning.R
 import java.util.*
 
@@ -85,5 +87,29 @@ object UIUtil {
             "zh" -> "zh"
             else -> "en"
         }
+    }
+
+    fun showLoading(context: Context): AlertDialog {
+        return showLoading(context, "Loading..")
+    }
+
+    fun showLoading(context: Context, msg: String?): AlertDialog {
+        val loadingView = View.inflate(context, R.layout.view_loading, null)
+        val dialogLoading = AlertDialog.Builder(context)
+            .setView(loadingView)
+            .setCancelable(false)
+            .show()
+        val tvLoading = loadingView.findViewById<TextView>(R.id.tvLoading)
+        tvLoading?.visibility = if (msg.isNullOrBlank()) {
+            View.GONE
+        } else {
+            tvLoading.text = msg
+            View.VISIBLE
+        }
+        return dialogLoading
+    }
+
+    fun dismissLoading(dialogLoading: AlertDialog?) {
+        dialogLoading?.dismiss()
     }
 }
