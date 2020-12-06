@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         // Dev:"0"; QA:"1"; Staging:"2"; Prod:"3";
-        buildConfigField 'int', 'serverType', '3'
+        buildConfigField 'int', 'serverType', '1'
         buildConfigField "boolean", "log", "false"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

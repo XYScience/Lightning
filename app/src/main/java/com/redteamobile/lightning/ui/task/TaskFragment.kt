@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redteamobile.lightning.R
+import com.redteamobile.lightning.data.remote.HttpManager
 import com.redteamobile.lightning.data.remote.model.bean.TaskModel
 import com.redteamobile.lightning.data.remote.model.response.TaskResponse
 import com.redteamobile.lightning.ui.profile.adapter.TaskAdapter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_task.*
 
 
@@ -46,27 +48,14 @@ class TaskFragment : Fragment() {
             list_task.addItemDecoration(dividerItemDecoration)
             taskAdapter = TaskAdapter(a)
             list_task.adapter = taskAdapter
-            val listTask = ArrayList<TaskModel>()
-            for (i in 0 until 10) {
-                val taskModel = TaskModel()
-                taskModel.id = 10000 + i
-                taskModel.status = if (i % 2 == 0) 1 else 0
-                taskModel.coins = 1 + i
-                taskModel.createDate = 1607177704L + (i * 10)
-                taskModel.result = "NONE"
-                taskModel.coins = 1 + (i * 5)
-                listTask.add(taskModel)
-            }
-            val taskModel = TaskModel()
-            taskModel.id = 10000 + 66
-            taskModel.status = 2
-            taskModel.coins = 245
-            taskModel.createDate = 1607177714L
-            taskModel.result = "NONE"
-            taskModel.coins = 34
-            listTask.add(taskModel)
-
-            taskAdapter?.setData(listTask)
+            HttpManager.getInstance(a).httpService.task()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    val listTaskModel = it.data
+                    listTaskModel?.let {
+                        taskAdapter?.setData(it)
+                    }
+                }
         }
     }
 }

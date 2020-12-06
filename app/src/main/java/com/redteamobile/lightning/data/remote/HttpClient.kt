@@ -40,7 +40,7 @@ object HttpClient {
     }
 
     private fun levelOfLog(): HttpLoggingInterceptor.Level {
-        return if (BuildConfig.log) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        return HttpLoggingInterceptor.Level.BODY
     }
 
 }

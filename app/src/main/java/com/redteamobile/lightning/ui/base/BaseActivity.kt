@@ -13,6 +13,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIUtil.setNavigationBarIconColor(this, true)
+        UIUtil.setStatusBarBackground(this, android.R.color.white)
         setContentView(getContentView())
         initView()
         initData()

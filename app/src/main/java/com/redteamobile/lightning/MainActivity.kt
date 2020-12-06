@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.redteamobile.lightning.data.remote.HttpManager
+import com.redteamobile.lightning.data.remote.model.request.TaskGetRequest
 import com.redteamobile.lightning.ui.base.BaseActivity
 import com.redteamobile.lightning.util.Activities
 import com.redteamobile.lightning.util.UIUtil
@@ -35,7 +36,6 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         setSupportActionBar(toolbar)
-        UIUtil.setStatusBarBackground(this, android.R.color.white)
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.action_bar_background))
         val navView: BottomNavigationView = findViewById(R.id.navigation)
 
@@ -80,6 +80,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-
+        HttpManager.getInstance(this).httpService.userInfo()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+            }
     }
 }

@@ -3,6 +3,7 @@ package com.redteamobile.lightning
 import android.annotation.SuppressLint
 import android.content.Context
 import com.redteamobile.lightning.data.local.sim.EuiccController
+import com.redteamobile.lightning.util.LogUtil
 
 class Global private constructor(context: Context) {
 
@@ -30,6 +31,7 @@ class Global private constructor(context: Context) {
 
     fun init() {
         euiccController = EuiccController(context)
+        LogUtil.initLogMode(context)
     }
 
 }

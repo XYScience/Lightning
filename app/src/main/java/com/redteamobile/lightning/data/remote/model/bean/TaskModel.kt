@@ -9,35 +9,38 @@ import android.os.Parcelable
  */
 class TaskModel() : Parcelable {
 
-    var id: Int? = 145678  //唯一编号
-    var name: String? = "Speed Test"  //任务名称
-    var status: Int? = 1  //状态：1用户可接单状态 0任务已经结束 2商家取消任务
-    var createDate: Long? = 1607177704  //创建时间
-    var coins: Int? = 10  //本次任务金额，单位分
-    var userId: Int? = 666  //执行任务的用户id，接单之前该字段为空
-    var merchantId: Int? = 123456  //接单的设备号
-    var result: String? = "Success"  //任务执行结果
+    var id: Int? = null  //唯一编号
+    var name: String? = null  //任务名称
+    var status: Int? = null  //状态：1用户可接单状态 0任务已经结束 2商家取消任务
+    var createDate: String? = null  //创建时间
+    var coins: Int? = null  //本次任务金额，单位分
+    var userId: Int? = null  //执行任务的用户id，接单之前该字段为空
+    var merchantId: Int? = null  //接单的设备号
+    var result: String? = null  //任务执行结果
+    var command: String? = null
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
         status = parcel.readValue(Int::class.java.classLoader) as? Int
-        createDate = parcel.readValue(Long::class.java.classLoader) as? Long
+        createDate = parcel.readString()
         coins = parcel.readValue(Int::class.java.classLoader) as? Int
         userId = parcel.readValue(Int::class.java.classLoader) as? Int
         merchantId = parcel.readValue(Int::class.java.classLoader) as? Int
         result = parcel.readString()
+        command = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeString(name)
         parcel.writeValue(status)
-        parcel.writeValue(createDate)
+        parcel.writeString(createDate)
         parcel.writeValue(coins)
         parcel.writeValue(userId)
         parcel.writeValue(merchantId)
         parcel.writeString(result)
+        parcel.writeString(command)
     }
 
     override fun describeContents(): Int {

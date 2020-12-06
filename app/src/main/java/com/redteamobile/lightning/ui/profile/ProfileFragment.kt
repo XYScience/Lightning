@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redteamobile.lightning.Global
 import com.redteamobile.lightning.R
 import com.redteamobile.lightning.ui.profile.adapter.ESimCardAdapter
-import com.redteamobile.lightning.ui.profile.adapter.TaskAdapter
 import com.redteamobile.lightning.util.LogUtil
 import kotlinx.android.synthetic.main.fragment_profile.*
 
